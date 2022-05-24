@@ -3,6 +3,7 @@ import "./home.css"
 import homeImage from "../../Images/background2.png"
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
+import Contact from '../ContactUs/contact';
 
 const Home = () => {
   return (
@@ -30,9 +31,7 @@ const Home = () => {
             <img src={homeImage} alt="sorry" />
         </div>
     </div>
-    <div className='secondary-Container'>
-
-    </div>
+    <Contact/>
     <Footer/>
    </>
   )

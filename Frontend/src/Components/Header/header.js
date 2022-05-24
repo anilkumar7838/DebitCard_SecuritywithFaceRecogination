@@ -15,7 +15,7 @@ const header = () => {
                 </div>
             </div>  
             <div className="list_style">
-                <ul class="menuList">
+                <ul className="menuList">
                     <li><a href="/">Solutions</a></li>
                     <li><a href="/">User Guide</a></li>
                     <li><a href="/">Pricing</a></li>
