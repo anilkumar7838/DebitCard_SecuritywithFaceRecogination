@@ -3,6 +3,8 @@ Frontend/node_modules
 **/node_modules
 Backend/env
 Backend/key.json
-**/.env
+Backend/backend/config/config.env
+Frontend/.env
 **/**/__pycache__
 Backend/facemania/media/pictures
+Backend/facemania/.env

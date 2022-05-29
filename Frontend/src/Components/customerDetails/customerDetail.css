@@ -1,119 +1,127 @@
-.customer-main{
+/* ------------ Container --------------- */
+.customer-main {
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
   flex-direction: column;
-  /* border: 2px solid red; */
-  background: linear-gradient(to right, #3e2bce 0%, #2dd3aa 100%, #2dd3aa 100%, #2dd3aa 100%);
+  background: linear-gradient(
+    to right,
+    #3e2bce 0%,
+    #2dd3aa 100%,
+    #2dd3aa 100%,
+    #2dd3aa 100%
+  );
 }
 
-.customer-main h1{
-    margin-top: 50px;
-    font-size: 30px;
-    font-weight: 500;
+/*  ----------------- Utils ------------- */
+.customer-main h1 {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: 500;
 }
 
-.mainBlock{
+/* -------------- Block1 -------------  */
+
+.mainBlock {
   display: flex;
   justify-content: center;
   margin: 80px 12px;
   align-items: center;
   flex-direction: column;
   width: 80%;
-  /* border: 2px solid red; */
-  box-shadow:10px 10px 10px 10px black;
-
+  box-shadow: 10px 10px 10px 10px black;
 }
 
-
-.top-detail{
+.top-detail {
   background-color: aqua;
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.top-detail .imgBox img{
-  width:25vmax;
-  margin:25px;
-  /* margin-top: 25px; */
+.top-detail .imgBox img {
+  width: 25vmax;
+  margin: 25px;
   border: 2px solid magenta;
   border-radius: 100px;
 }
-.mainDetails{
+.mainDetails {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top:12px;
+  margin-top: 12px;
 }
 
-.bottom-detail{
+.bottom-detail {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.bottom-detail form{
-  padding:40px;
+.bottom-detail form {
+  padding: 40px;
   background: #fff;
 }
-.mainDetails form{
-  padding:40px;
+.mainDetails form {
+  padding: 40px;
 }
 
 .bottom-detail label input,
-.mainDetails label input{
-    width: 100%;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    margin-right: 12px;
-    border: none;
-    border-bottom: 2px solid #333;
-    background: none;
-    outline: none;
-    resize: none;
+.mainDetails label input {
+  width: 100%;
+  padding: 5px 0;
+  font-size: 16px;
+  margin: 10px 0;
+  margin-right: 12px;
+  border: none;
+  border-bottom: 2px solid #333;
+  background: none;
+  outline: none;
+  resize: none;
 }
 
-.bottom-detail label span,.mainDetails label span{
-    float: left;
-    padding: 5px 0;
-    font-size: 16px;
-    margin:10px 0;
-    pointer-events: none;
-    transition: 0.5s;
-    color:#666;
+.bottom-detail label span,
+.mainDetails label span {
+  float: left;
+  padding: 5px 0;
+  font-size: 16px;
+  margin: 10px 0;
+  pointer-events: none;
+  transition: 0.5s;
+  color: #666;
 }
 
-.customer-main input[type="submit"]{
-    width:100px;
-    background: #00bcd4;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 40px;
+.customer-main input[type="submit"] {
+  width: 100px;
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 40px;
 }
 
-@media (max-width:991px) {
-  .customer-main{
+/* ---------- For Responsive ----------- */
+
+@media (max-width: 991px) {
+  .customer-main {
     padding: 50px;
   }
-  .top-detail{
-      flex-direction: column;
+  .top-detail {
+    flex-direction: column;
   }
 }
 
-@media (max-width:400px) {
-  .top-detail .imgBox img{
+@media (max-width: 400px) {
+  .top-detail .imgBox img {
     width: 12vmax;
     margin-bottom: -22px;
   }
-  .mainBlock{
+  .mainBlock {
     width: 100%;
   }
-  .customer-main h1{
-    margin-top: 0;;
+  .customer-main h1 {
+    margin-top: 0;
   }
 }

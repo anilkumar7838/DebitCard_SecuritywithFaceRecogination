@@ -1,55 +1,71 @@
-.cash-main{
-    background: linear-gradient(to top, #3e2bce 0%, #2dd3aa 100%, #2dd3aa 100%, #2dd3aa 100%);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* ------------- Container ----------  */
+.cash-main {
+  background: linear-gradient(
+    to top,
+    #3e2bce 0%,
+    #2dd3aa 100%,
+    #2dd3aa 100%,
+    #2dd3aa 100%
+  );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ /* ---------- Form --------- */
+.cash-form {
+  width: 500px;
+  background-color: #fff;
+  text-align: center;
+  padding: 50px;
 }
 
-.cash-form{
-    width:500px;
-    background-color: #fff;
-    text-align: center;
-    padding: 50px;
+/* -------- Utils -------- */
+
+.cash-form h2 {
+  text-transform: uppercase;
+  font-size: 26px;
+  width: 100%;
 }
 
-.cash-form h2{
-    text-transform: uppercase;
-    font-size: 26px;
-    width:100%;
+.cash-form p {
+  padding: 20px 0;
+  color: #999;
+  font-size: 15px;
+  line-height: 24px;
 }
 
-.cash-form p{
-    padding: 20px 0;
-    color:#999;
-    font-size: 15px;
-    line-height: 24px;
+.Amount {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  background-color: #f4f4f4;
+  border: 2px solid #d4d4d4;
+  margin-bottom: 20px;
 }
 
-.Amount{
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    background-color: #f4f4f4;
-    border: 2px solid #d4d4d4;
-    margin-bottom: 20px;
+/* ------------- Button ------------ */
+.cash-btn {
+  width: 50%;
+  height: 50px;
+  border: 0;
+  background-color: #2dd3aa;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s linear;
 }
 
-.cash-btn{
-    width:100%;
-    height: 50px;
-    border: 0;
-    background-color: #2dd3aa;
-    color:#fff;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .3s linear;
+.cash-btn:hover {
+  opacity: 0.8;
 }
 
-.cash-btn:hover{
-    opacity: .8;
+@media screen and (max-height:500px) {
+    .cash-main{
+      height:500px;
+    }
 }

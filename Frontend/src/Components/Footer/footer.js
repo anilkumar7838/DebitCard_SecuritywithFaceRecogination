@@ -1,6 +1,6 @@
 import React from 'react'
 import playstore from "../../Images/playstore.png";
-import appstore from "../../Images/Appstore.png";
+import microsoftStore from "../../Images/microsoftStore.png";
 import "./footer.css";
 
 const footer = () => {
@@ -10,7 +10,7 @@ const footer = () => {
             <h4>DOWNLOAD OUR APP</h4>
             <p>Download App for Android and IOS mobile phone</p>
             <img src={playstore} alt="playstore"/>
-            <img src={appstore} alt="Appstore"/>
+            <img src={microsoftStore} alt="Appstore"/>
         </div>
         <div className="midfooter">
             <h1 id="logo">FaceMania</h1>

@@ -1,5 +1,5 @@
 import "./LoginUi.css";
-import react, { useRef, useState,useContext } from "react";
+import react, { useRef, useState,useContext ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -11,23 +11,32 @@ import Slide from '@mui/material/Slide';
 import axios from "axios";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import {LoginContext} from "./LoginContext";
+import LoginContext from "./LoginContext";
+import { useNavigate } from "react-router-dom";
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_LOGIN_BACKEND,
+});
 
 const Transition = react.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const poses = ["left","right"]
 const LoginUi = () => {
+  let navigate = useNavigate();
   const loginDetails = useContext(LoginContext);
   const [verificationMode, setVerificationMode] = useState(null);
   const [open, setOpen] = useState(false);
   const [localStream, setLocalStream] = useState(null);
   const [frameInterval, setFrameInterval] = useState(null);
-  const [userDetails, setUserDetails] = useState({ "username": "", "pin": "", "faceData": "", "width": "", "height": "" });
+  const [userDetails, setUserDetails] = useState({ "username": "", "pin": "", "faceData": "", "width": "", "height": "","faceData2":"","pose":"" });
   const [alertDetails, setAlertDetails] = useState({ "message": "", "severity": "", "open": false });
   const canvasRef = useRef();
+  const [poseMessage,setPoseMessage] = useState("");
   const handleClickOpen = () => {
     setVerificationMode("face");
+    const pose = poses[Math.floor(Math.random() * poses.length)];
+    setPoseMessage(pose);
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -67,18 +76,18 @@ const LoginUi = () => {
     if (!details.username || details.username.length != 16) {
       setAlertDetails({ "message": "Please Enter a valid username", "severity": "warning", "open": true });
       setTimeout(() => {
-        setAlertDetails({ "message": "", "severity": "", "open": false });
       }, 10000);
       return;
     }
     let loginUrl = verificationMode == "face" ? `/user/login/face` : `/user/login/pin`;
-    axios.post(loginUrl, details).then((res) => {
+    instance.post(loginUrl, details).then((res) => {
       if (res.data.success && res.data.user) {
         setAlertDetails({ "message": res.data.message, "severity": "success", "open": true });
         loginDetails.login(res.data.user);
         setTimeout(() => {
           setAlertDetails({ "message": "", "severity": "", "open": false });
-        }, 10000);
+          navigate("/transaction",{replace:true});
+        }, 2000);
       } else {
         setAlertDetails({ "message": res.data.message, "severity": "error", "open": true });
         setTimeout(() => {
@@ -98,6 +107,7 @@ const LoginUi = () => {
     e.preventDefault();
     handleSubmit(userDetails);
   }
+  
   const handleFaceLogin = () => {
     const canvas = canvasRef.current;
     if (canvas) {
@@ -106,16 +116,27 @@ const LoginUi = () => {
       const faceData = imageData.filter((val, i) => {
         return i % 4 != 3;
       })
-      let newDetails = { ...userDetails, "faceData": faceData, 'width': canvas.width, 'height': canvas.height };
-      setUserDetails(newDetails);
-      handleSubmit(newDetails);
+      let newDetails = { ...userDetails, "faceData": faceData, 'width': canvas.width, 'height': canvas.height,"pose":poseMessage };
+      setTimeout(()=>{
+        let imageData2 = Array.from(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
+        const faceData2 = imageData2.filter((val, i) => {
+          return i % 4 != 3;
+        });
+        newDetails["faceData2"] = faceData2
+        setUserDetails(newDetails);
+        handleSubmit(newDetails);
+        handleClose();
+      },800);
     }
-    handleClose();
-
   }
+  useEffect(()=>{
+    if(loginDetails.user){
+      navigate("/transaction",{replace:true});
+    }
+  },[])
   return (
-    <div className="body">
-      <Stack sx={{ width: '100%' }} spacing={2}>
+    <div className="login-container">
+      <Stack sx={{ width: '100%',zIndex:"1000",position:"absolute",top:"0px" }} spacing={2}>
         {alertDetails.open && <Alert severity={alertDetails.severity}>{alertDetails.message}</Alert>}
       </Stack>
       <div className="loginui">
@@ -137,7 +158,7 @@ const LoginUi = () => {
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle>{"Make sure your face appear properly"}</DialogTitle>
+            <DialogTitle>{`Turn face ${poseMessage} slowly`}</DialogTitle>
             <DialogContent style={{ display: "flex", justifyContent: "center" }}>
               <canvas ref={canvasRef} width={300} height={300}></canvas>
             </DialogContent>

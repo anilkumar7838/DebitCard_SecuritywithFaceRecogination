@@ -3,17 +3,25 @@ import axios from "axios";
 
 const LoginContext = React.createContext();
 
-let user = null;
-const logout = () => {
-    axios.defaults.headers.common.Authorization = null;
-    user = null;
-}
-const login = (userDetails)=>{
-    axios.defaults.headers.common.Authorization = `Bearer ${userDetails.token}`;
-    user = userDetails;
-    setTimeout(()=>{
-        logout();
-    },20*60*1000);
+const LoginState = (props) => {
+    const [user,setUser] = React.useState(null);
+    const logout = () => {
+        axios.defaults.headers.common.Authorization = null;
+        setUser(null);
+    }
+    const login = (userDetails)=>{
+        axios.defaults.headers.common.Authorization = `Bearer ${userDetails.token}`;
+        setUser(userDetails);
+        setTimeout(()=>{
+            logout();
+        },20*60*1000);
+    }
+    return (
+        <LoginContext.Provider value={{user,login,logout}}>
+            {props.children}
+        </LoginContext.Provider>
+    )
 }
 
-export {user,login,logout,LoginContext};
+export default LoginContext;
+export {LoginState};

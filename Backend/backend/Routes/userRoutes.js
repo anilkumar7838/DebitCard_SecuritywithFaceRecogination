@@ -1,14 +1,14 @@
 const express = require("express");
+const authorizeUser = require("../middleware/authorizeUser");
 
-const {getAccountDetails, loginUser, registerUser, logout, getTransaction} = require("../controllers/userControllers");
-const {isAuthenticatedUser} = require("../middleware/authentication");
+const {getAccountDetails,withdrawCash, fundTransfer, miniStatement, getReview} = require("../controllers/userControllers");
 
 const router = express.Router();
-
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
-router.route("/logout").get(logout);
-router.route("/user/:id").get(isAuthenticatedUser,getAccountDetails);
-router.route("/user/transaction").get(isAuthenticatedUser,getTransaction);
+router.route("/withdraw").post(authorizeUser,withdrawCash);
+router.route("/fundtransfer").post(authorizeUser,fundTransfer);
+router.route("/ministatement").get(authorizeUser,miniStatement);
+// router.route("/user/details").get(authorizeUser,getAccountDetails);
+router.route("/user/details").get(authorizeUser,getAccountDetails);
+router.route("/contact").post(getReview);
 
 module.exports=router;

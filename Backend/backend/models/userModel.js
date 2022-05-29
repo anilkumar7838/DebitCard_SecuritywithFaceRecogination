@@ -3,6 +3,10 @@ const bcrypt= require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
+    id:{
+        type:Number,
+        required:true,
+    },
     AccountHolderName:{
         type:String,
         required:[true,"Please Enter Your Name"],
@@ -12,15 +16,47 @@ const userSchema = new mongoose.Schema({
     BankName:{
         type:String,
         required:[true,"Please Enter Your Bank Name"],
-        minlength:[6,"Name is too short"],
+        minlength:[2,"Name is too short"],
     },
     Branch:{
         type:String,
         required:[true,"Please Enter Your Branch Name"],
-        minlength:[6,"Name is too short"],
+        minlength:[2,"Name is too short"],
+    },
+    Email:{
+        type:String,
+        maxlength:[30,"Cannot exceed 100 Characters"],
+    },
+    PhoneNumber:{
+        type:String,
+        required:[true,"Please Enter Your Phone Number"],
+        maxlength:[15,"Cannot exceed 15 Characters"],
+    },
+    RelationField:{
+        type:String,
+        maxlength:[30,"Cannot exceed 30 Characters"],
+    },
+    CIFNumber:{
+        type:String,
+        maxlength:[20,"Cannot exceed 20 Characters"],
+    },
+    MICRNumber:{
+        type:String,
+        maxlength:[20,"Cannot exceed 20 Characters"],
+    },
+    AccountType:{
+        type:String,
+        maxlength:[100,"Cannot exceed 100 Characters"],
+    },
+    DOB:{
+        type:Date
+    },
+    Address:{
+        type:String,
+        maxlength:[1000,"Cannot exceed 1000 Characters"],
     },
     AccountNumber:{
-        type:Number,
+        type:String,
         required:[true, "Please Enter Your Account Number"],
     },
     IFSC_code:{
@@ -28,62 +64,37 @@ const userSchema = new mongoose.Schema({
         required:[true,"Please Enter Your IFSC code"],
         maxlength:[20,"Cannot exceed 20 Characters"],
     },
-    token:{
+    Pin:{
+        type:String,
+        required:[true,"Please Enter Your Pin"],
+        maxlength:[6,"Cannot exceed 6 Characters"],
+        minlength:[6,"Pin is too short"],
+    },
+    Picture:{
+        type:String,
+        required:[true,"Please Enter Your Picture"],
+        maxlength:[5000,"Cannot exceed 5000 Characters"],
+    },
+    Token:{
         type:String,
         maxLength:[100,"Cannot exceed 100 characters"],
+    },
+    Token_created_at:{
+        type:Date,
     },
     TotalBalance:{
         type:Number,
         default:0
-    },
-    Face:{
-        public_id:{
-            type:String,
-            required:true,
-        },
-        url:{
-            type:String,
-            required:true,
-        },
     },
     Pin:{
         type:String,
         select:false,
         required:true,
     },
-    Transaction:[
-        {
-            name:{
-                type:String,
-                required:true,
-            },
-            accountNumber:{
-                type:Number,
-                required:true
-            },
-            bankName:{
-                type:String,
-                required:true
-            },
-            IFSC_code:{
-                type:String,
-                required:[true,"Please Enter IFSC code"],
-                maxlength:[20,"Cannot exceed 30 Characters"],
-            },
-            Amount:{
-                type:String,
-                required:[true,"Please Enter the Amount to transfer"],
-                maxlength:[20,"Cannot exceed 20 Characters"],
-            },
-
-        }
-    ],
     createAt:{
         type:Date,
         default:Date.now,
-    },
-    resetPinToken:String,
-    resetPinExpire:Date,
+    }
 });
 
 

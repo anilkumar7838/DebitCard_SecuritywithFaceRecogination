@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND || "http://localhost:8000" ;
-console.log(process.env)
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -1,9 +1,17 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import "./Transaction.css";
 import Footer from "../Footer/footer";
-
+import LoginContext from "../Login/LoginContext";
+import { useNavigate } from "react-router-dom";
 const Transaction = () => {
+  const logincontext = React.useContext(LoginContext);
+  const navigate = useNavigate();
+  React.useEffect(()=>{
+    if(!logincontext.user){
+      navigate("/login",{replace:true});
+    }
+  },[]);
   return (
   <>
     <div className="wrapper">
@@ -20,10 +28,7 @@ const Transaction = () => {
             <div className="back">
               <div className="inner">
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptates earum nisi, autem consequatur necessitatibus porro
-                  dolorem, id impedit accusantium, vel pariatur eius aliquam
-                  nostrum?
+                Get the details of your account.
                 </p>
                 <Link to="/details">
                   <button className="transaction-btn">check</button>
@@ -43,10 +48,7 @@ const Transaction = () => {
             <div className="back">
               <div className="inner">
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptates earum nisi, autem consequatur necessitatibus porro
-                  dolorem, id impedit accusantium, vel pariatur eius aliquam
-                  nostrum?
+                Get a list of the recent transactions performed by you.
                 </p>
                 <Link to="/ministatement">
                 <button className="transaction-btn">Generate</button>
@@ -66,10 +68,7 @@ const Transaction = () => {
             <div className="back">
               <div className="inner">
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptates earum nisi, autem consequatur necessitatibus porro
-                  dolorem, id impedit accusantium, vel pariatur eius aliquam
-                  nostrum?
+                Withdraw money from your account.
                 </p>
                 <Link to="/cashwithdraw">
                 <button className="transaction-btn">Withdraw</button>
@@ -89,10 +88,7 @@ const Transaction = () => {
             <div className="back">
               <div className="inner">
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptates earum nisi, autem consequatur necessitatibus porro
-                  dolorem, id impedit accusantium, vel pariatur eius aliquam
-                  nostrum?
+                Transfer money from one account to another.
                 </p>
                 <Link to="/fundtransfer">
                 <button className="transaction-btn">Transfer</button>
